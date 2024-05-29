@@ -2,35 +2,53 @@ const numberInput = document.getElementById("number-input");
 const convertBtn = document.getElementById("convert-btn");
 const result = document.getElementById("result");
 
-const decimalToBinary = (input) => {
-    const inputs = [];
-    const quotients = [];
-    const remainders = [];
-
-    while(input > 0){
-        const quotient = Math.floor(input / 2);
-        const remainder = input % 2;
-        inputs.push(input);
-        quotients.push(quotient);
-        remainders.push(remainder);
-        input = quotient;
+const animationData = [
+    {
+        inputVal: 5,
+        marginTop: 300,
+        addElDelay: 1000 
     }
+]; //store data for each frame of the animation. inputVal: input each time recursive func runs, marginTop: top margin for DOM elements added to the page, addElDelay: delay between adding DOM elements to page
 
-     console.log("Inputs: ", inputs);
-     console.log("Quotients: ", quotients);
-     console.log("Remainders: ", remainders);
-     result.innerText = remainders.reverse().join("");
+const decimalToBinary = (input) => {
+    if(input === 0 || input === 1){
+        return String(input)
+    } 
+    else{
+        return decimalToBinary(Math.floor(input / 2)) + (input % 2);
+    }
+}
+
+// useful for asyn code 
+const showAnimation = ()=> {
+    setTimeout(() => {
+        console.log("free");
+    }, 500);
+    setTimeout(() => {
+        console.log("Code");
+    }, 1000);
+    setTimeout(() => {
+        console.log("Camp");
+    }, 1500);
 }
 
 const checkUserInput = () =>{
+    const inputInt = parseInt(numberInput.value); //cuts down on continuous use of parseInt previously
+
     // console.log(numberInput.value);
     // parseInt converts a string into an integer or whole number. Takes at least one argument, a string to be converted into an integer, and returns either an intiger or NaN
-    if(!numberInput || isNaN(parseInt(numberInput.value))){
+    if(!numberInput || isNaN(inputInt)){
         alert("Please provide a decimal number");
         return;
     }
 
-    decimalToBinary(parseInt(numberInput.value));
+    // show animation when user tries to convert 5 to binary
+    if(inputInt === 5){
+        showAnimation();
+        return;
+    }
+
+    result.textContent = decimalToBinary(inputInt);
     numberInput.value = "";
 }
 
