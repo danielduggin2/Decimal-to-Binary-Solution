@@ -4,7 +4,7 @@ Let's delve into the fundamental concepts of recursion, explore the call stack, 
 
 ## Project Overview
 
-In this project, you'll embark on building a decimal-to-binary converter using JavaScript. The project covers fundamental concepts such as:
+The project covers fundamental concepts such as:
 
 - Understanding and implementing recursion.
 - Exploring the call stack and how it operates with recursive functions.
